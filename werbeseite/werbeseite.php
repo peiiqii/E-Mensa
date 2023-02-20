@@ -1,9 +1,15 @@
+<?php
+/**
+ * Praktikum DBWT. Autoren:
+ * shuyang, zhang, 3270926
+ * Pei Qi, Lim, 3530737
+ */
+include 'Gerichte.php';
+global $Gerichte;
+include "sqlanmelden.php";
+?>
+
 <!DOCTYPE html>
-<!--
-- Praktikum DBWT. Autoren:
-- Pei Qi, Lim, 3530737
-- Shuyang, Zhang, 3270926
--->
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -51,10 +57,13 @@
       margin-left: 450px;
       text-align: justify;
     }
+    table{
+        margin-right: auto;
+        margin-left: auto;
+    }
     table,th,tr,td{
       border:1px solid black;
       border-collapse: collapse;
-      margin-left: 450px;
     }
     .Zahlrow {
       display: grid;
@@ -65,6 +74,11 @@
       margin-left: 10px;
       float: left;
       width: 300px;
+    }
+    .form{
+        margin-left: 400px;
+        max-width: 800px;
+        margin-right:400px;
     }
     ul{
       list-style-position: inside;
@@ -88,8 +102,8 @@
   </nav><br>
 </header>
 <hr>
-<main>
-  <img src="img/mensa-Eupener_Strasse.jpg" height="350" width="400" alt="Mensa Eupener Straße" />
+<div>
+  <img src="img/mensa-Eupener_Strasse.jpg" height="200" width="400" alt="Mensa Eupener Straße" />
   <h1><a id="Ank">Bald gibt es Essen auch online ;)</a></h1>
   <div class="Ankinhalt">
     Es gibt viele Gründe, Essen oder Nahrungsmittel zu bestellen.
@@ -102,11 +116,22 @@
   </div><br>
   <h1 id="Speisen">Köstlichkeiten, die Sie erwarten</h1>
   <table>
+
     <tr>
       <th></th>
       <th>Preis intern</th>
       <th>Preis extern</th>
     </tr>
+      <?php
+      foreach ($Gerichte as $item) {
+          echo '<tr>';
+          echo '<td>' . $item['name'] . '</td>';
+          echo '<td>' . $item['price intern'] . '</td>';
+          echo '<td>' . $item['price extern'] . '</td>';
+          echo '<td>' . $item['uebersicht'] . '</td>';
+          echo '</tr>';
+      }
+      ?>
     <tr>
       <td>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika,dazu Nudeln</td>
       <td>3,50</td>
@@ -138,20 +163,7 @@
   </div>
 
   <h1 id="Kontakt">Interesse geweckt? Wir informieren Sie!</h1>
-  <form action="index.php" method="post">
-    <label class="input" for="name" >Ihr Name:</label>
-    <input type="text" id="name" placeholder="Vorname" name="name">
-    <label class="input" for="email" >Ihre E-Mail:</label>
-    <input type="email" id="email" name="email">
-    <label class="input" for="sprache">Newsletter bitte in:</label>
-    <select id="sprache">
-      <option selected>Deutsch</option>
-      <option>English</option>
-    </select><br>
-    <input type="checkbox" id="datenschutz" name="datenschutz" required>
-    <label for="datenschutz">Den Datenschutzbestimmungen stimme ich zu.</label>
-    <input type="submit" value="Zum Newsletter anmelden">
-  </form>
+    <div class="form"><?php include "newsletteranmeldung.php"?></div>
 
   <h1 id="wichtig">Das ist uns wichtig</h1>
   <ul>
@@ -161,7 +173,7 @@
   </ul>
 
   <h1 id="Text">Wir freuen uns auf Ihren Besuch!</h1>
-</main>
+</div>
 <hr>
 <footer>
   (c) E-Mensa GmbH |
