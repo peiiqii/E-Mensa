@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    #untereinander{
+      display: grid;
+      gap:1px
+    }
+    #nebeneinander{
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 20px;
+    }
+    #nebeneinander #zhong{
+      justify-self: center;
+    }
+    #zent{
+      display: grid;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+<div id="untereinander">
+  <div>text</div>
+  <div>text</div>
+  <div>text</div>
+</div>
+<div id="nebeneinander">
+  <div>text</div>
+  <div id="zhong">text</div>
+  <div>text</div>
+</div>
+<div id="zent">
+  <div>text</div>
+</div>
+</body>
+</html>
