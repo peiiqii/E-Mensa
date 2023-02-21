@@ -19,8 +19,8 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
   <title>Ihre E-Mensa</title>
   <style>
     *{
-      margin-left: 10px;
-      margin-right: 10px;
+      margin-left: 20px;
+      margin-right: 20px;
       text-align: center;
     }
     header h1{
@@ -47,7 +47,7 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
       text-decoration: none;
       font-size: 25px;
     }
-    .menu a:hover {
+    .menu a:hover{
       background-color: lightgrey;
       color: black;
     }
@@ -59,6 +59,7 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
       border: 1px solid black;
       margin-left: 450px;
       text-align: justify;
+      font-size: 18px;
     }
     table{
         margin-right: auto;
@@ -70,8 +71,7 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
     }
     .Zahlrow {
       display: grid;
-      grid-template-columns: 30% 40% 20%;
-      gap: 0px;
+      grid-template-columns: auto auto auto;
     }
     .column {
       margin-left: 10px;
@@ -79,9 +79,13 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
       width: 300px;
     }
     .form{
-        margin-left: 400px;
-        max-width: 800px;
-        margin-right:400px;
+        margin-left: 300px;
+        margin-right:300px;
+    }
+    .grid-container{
+        display: grid;
+        grid-template-columns: 60% 40%;
+        margin-left: 10px;
     }
     ul{
       list-style-position: inside;
@@ -105,8 +109,8 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
   </nav><br>
 </header>
 <hr>
-<div>
-  <img src="img/mensa-Eupener_Strasse.jpg" height="200" width="400" alt="Mensa Eupener Straße" />
+<main>
+  <img src="img/mensa-Eupener_Strasse.jpg" height="250" width="400" alt="Mensa Eupener Straße" />
   <h1><a id="Ank">Bald gibt es Essen auch online ;)</a></h1>
   <div class="Ankinhalt">
     Es gibt viele Gründe, Essen oder Nahrungsmittel zu bestellen.
@@ -116,41 +120,53 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
     Somit ist es letztlich egal, ob du aus Faulheit nicht in den nächsten Supermarkt gehen willst, Sorge davor hast, dich anzustecken oder einfach Inspiration für dein nächstes Mittagessen brauchst.
     Es gibt verschiedene Ansätze, die Essenslieferdienste verfolgen.
     Die besten haben wir für dich in der Übersicht.
-  </div><br>
-  <h1 id="Speisen">Köstlichkeiten, die Sie erwarten</h1>
-  <table>
+  </div><br><br><br>
 
-    <tr>
-      <th></th>
-      <th>Preis intern</th>
-      <th>Preis extern</th>
-    </tr>
-      <?php
-      foreach ($Gerichte as $item) {
-          echo '<tr>';
-          echo '<td>' . $item['name'] . '</td>';
-          echo '<td>' . $item['price intern'] . '</td>';
-          echo '<td>' . $item['price extern'] . '</td>';
-          echo '<td>' . $item['uebersicht'] . '</td>';
-          echo '</tr>';
-      }
-      ?>
-    <tr>
-      <td>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika,dazu Nudeln</td>
-      <td>3,50</td>
-      <td>6,20</td>
-    </tr>
-    <tr>
-      <td>Spinatrisotto mit kleinen Samosateigecken und gemischter Salat</td>
-      <td>2.90</td>
-      <td>5,30</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </table><br>
+  <div class="grid-container">
+      <div class="grid-item">
+      <h1 id="Speisen">Köstlichkeiten, die Sie erwarten</h1>
+      <table>
+        <tr>
+          <th></th>
+          <th>Preis intern</th>
+          <th>Preis extern</th>
+        </tr>
+          <?php
+          foreach ($Gerichte as $item) {
+              echo '<tr>';
+              echo '<td>' . $item['name'] . '</td>';
+              echo '<td>' . $item['price intern'] . '</td>';
+              echo '<td>' . $item['price extern'] . '</td>';
+              echo '<td>' . $item['uebersicht'] . '</td>';
+              echo '</tr>';
+          }
+          ?>
+        <tr>
+          <td>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika,dazu Nudeln</td>
+          <td>3,50</td>
+          <td>6,20</td>
+        </tr>
+        <tr>
+          <td>Spinatrisotto mit kleinen Samosateigecken und gemischter Salat</td>
+          <td>2.90</td>
+          <td>5,30</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+      </table><br>
+      </div>
+
+    <div class="grid-item">
+        <h1 id="wunsch">
+            <h1>Wunschgericht</h1>
+            <a href="wunschgericht.php"> wunschgericht </a>
+            <?php include ('./wunschgericht.php'); ?>
+        </h1>
+    </div>
+  </div>
 
   <h1 id="Zahlen">E-Mensa in Zahlen</h1>
   <div class="Zahlrow">
@@ -165,7 +181,9 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
     </div>
   </div>
 
-  <h1 id="Kontakt">Interesse geweckt? Wir informieren Sie!</h1>
+
+
+    <h1 id="Kontakt">Interesse geweckt? Wir informieren Sie!</h1>
     <div class="form"><?php include "newsletteranmeldung.php"?></div>
 
   <h1 id="wichtig">Das ist uns wichtig</h1>
@@ -176,7 +194,7 @@ $result = mysqli_query($link,"insert into besucher(date) values (now())");
   </ul>
 
   <h1 id="Text">Wir freuen uns auf Ihren Besuch!</h1>
-</div>
+</main>
 <hr>
 <footer>
   (c) E-Mensa GmbH | Peiqi Lim, Shuyang Zhang | <a href="">Impressum</a>

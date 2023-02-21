@@ -153,8 +153,7 @@ function checkeverything(){
         <label for="frau">Anrede</label>
         <br>
         <input type="radio"  name="Anrede" value="Frau" id="frau">
-
-        <label for="frau">Frau</label>
+        <label for="frau">Frau</label><br>
         <input type="radio"  name="Anrede" value="Herr" id="herr">
         <label for="herr"> Herr</label>
         <br>

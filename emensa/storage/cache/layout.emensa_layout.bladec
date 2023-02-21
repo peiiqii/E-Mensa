@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+ <meta charset="UTF-8">
+ <title><?php echo $this->yieldContent('title'); ?></title>
+ <?php echo $this->yieldContent('style'); ?>
+</head>
+<body>
+<?php echo $this->yieldContent('navi'); ?>
+<?php echo $this->yieldContent('ank'); ?>
+<?php echo $this->yieldContent('speisanzeigen'); ?>
+<?php echo $this->yieldContent('zahl'); ?>
+<?php echo $this->yieldContent('newsletter'); ?>
+<?php echo $this->yieldContent('wichtig'); ?>
+<footer>
+ <?php echo $this->yieldContent('footer'); ?>
+</footer>
+</body>
+</html>

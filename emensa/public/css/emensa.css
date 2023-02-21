@@ -1,0 +1,74 @@
+*{
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+#title{
+    margin: auto;
+    font-size: 70px;
+    width: 50%;
+    font-style: italic;
+}
+#header_img{
+    float: left;
+    margin-top: 20px;
+}
+nav{
+    margin: auto;
+    overflow: hidden;
+    background-color: #333;
+}
+nav a{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+}
+nav a:hover{
+    background-color: lightgrey;
+    color: black;
+}
+#mensa_img{
+    float: left;
+}
+.Ankinhalt{
+    border: 1px solid black;
+    margin-left: 450px;
+    text-align: justify;
+    font-size: 18px;
+}
+table{
+    margin-right: auto;
+    margin-left: auto;
+}
+table,th,tr,td{
+    border:1px solid black;
+    border-collapse: collapse;
+}
+.Zahlrow {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.column {
+    margin-left: 10px;
+    float: left;
+    width: 300px;
+}
+.form{
+    margin-left: 300px;
+    margin-right:300px;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 0px;
+}
+ul{
+    list-style-position: inside;
+}
+footer {
+    font-size: 20px;
+}
