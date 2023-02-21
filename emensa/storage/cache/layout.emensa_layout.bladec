@@ -6,6 +6,7 @@
  <?php echo $this->yieldContent('style'); ?>
 </head>
 <body>
+<?php echo $this->yieldContent('benutzer'); ?>
 <?php echo $this->yieldContent('navi'); ?>
 <?php echo $this->yieldContent('ank'); ?>
 <?php echo $this->yieldContent('speisanzeigen'); ?>

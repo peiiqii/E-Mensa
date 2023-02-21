@@ -26,4 +26,13 @@ return array(
     '/page2' => 'ExampleController@page2',
     '/layout'=>'ExampleController@layout',
 
+    '/verfizieren'=>'VerifizierenController@verfizieren',
+    '/anmeldungen'=>'VerifizierenController@anmeldungen',
+    '/abmeldungen'=>'AbmeldungenController@abmeldungen',
+    '/bewertung'=>'BewertungController@bewertungen',
+    '/bewertungspeicherung'=>'BewertungController@bewertungspeichern',
+    '/bewertungen'=>'BewertungController@bewertungenanzeigen',
+    '/meinebewertungen'=>'BewertungController@meinebewertungen',
+    '/loeschenbewertungen'=>'BewertungController@loeschenbewertungen',
+    '/hervorheben'=>'BewertungController@hervor'
 );

@@ -6,6 +6,7 @@
     @yield('style')
 </head>
 <body>
+@yield('benutzer')
 @yield ('navi')
 @yield ('ank')
 @yield('speisanzeigen')

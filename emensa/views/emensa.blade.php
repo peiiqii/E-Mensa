@@ -8,6 +8,23 @@
     Emensa
 @endsection
 
+@section('benutzer')
+    <?php session_start()?>
+    @if(isset($benutzer))
+        {{$benutzer['name']}} angemeldet
+        <a href="/abmeldungen">abmelden</a>
+        <br>
+        <a href="<?php echo "/meinebewertungen?id=".$benutzer['id']; ?>"  > Meine_Bewertungen &nbsp;&nbsp;&nbsp;  </a>
+        <a href="<?php echo "/bewertung?id=".$benutzer['id']."&admin=".$benutzer['admin']; ?>">Bewertungen &nbsp;&nbsp;&nbsp;</a>
+        <a href="<?php echo "/bewertungen?id=".$benutzer['id']."&admin=".$benutzer['admin']; ?>">letze 30 bewertungen anzeigen</a>
+        <br>
+    @else
+        <a href="<?php echo "/anmeldungen?bewertung=1"; ?>">Bewertungen &nbsp;&nbsp;&nbsp;</a>
+        <a href="<?php echo "/bewertungen?admin=0"?>">letze 30 bewertungen anzeigen &nbsp;&nbsp;&nbsp;</a>
+        <a href="<?php echo "/anmeldungen?bewertung=0"; ?>">anmelden</a>
+    @endif
+@endsection
+
 @section('navi')
     <img id="header_img" src="img/emensa-logo.jpg" height="135" width="135" alt="E-Mensa Logo">
     <h1 id="title">E-Mensa</h1>
@@ -45,6 +62,7 @@
                     <th></th>
                     <th>Interner Preis</th>
                     <th>Externer Preis</th>
+                    <th></th>
                 </tr>
                 @foreach($gerichtlist as $gericht)
                     <tr>
@@ -58,6 +76,10 @@
                         </td>
                         <td>{{number_format($gericht['preis_intern'], 2,',')}}&euro;</td>
                         <td>{{number_format($gericht['preis_extern'], 2,',')}}&euro;</td>
+                        <td>@if(isset($benutzer))
+                                <a href="{{ "/bewertung?"."id=".$benutzer['id']."&gerichtid=".$gericht['id']}}">bewerten</a>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table><br>
@@ -99,7 +121,7 @@
             <p>Anmeldungen zum Newsletter: {{count($anmeldenlist)}}</p>
         </div>
         <div class="column">
-            <p> Speisen: {{count($gerichtlist)}}</p>
+            <p>Speisen: {{count($gerichtlist)}}</p>
         </div>
     </div>
 @endsection

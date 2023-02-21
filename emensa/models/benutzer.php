@@ -52,3 +52,44 @@ function verfizieren($email,$password){
     }
 }
 
+function idnamelist(){
+    try {
+        $link = connectdb();
+
+        $sql = 'SELECT id,name FROM benutzer ORDER BY id';
+        $result = mysqli_query($link, $sql);
+
+        $da = mysqli_fetch_all($result, MYSQLI_BOTH);
+
+        mysqli_close($link);
+        $data=null;
+        for($i=0;$i<sizeof($da);$i++){
+            $data[$da[$i]['id']]=$da[$i]['name'];
+        }
+    }
+    catch (Exception $ex) {
+        $data = array(
+            'id'=>'-1',
+            'error'=>true,
+            'name' => 'Datenbankfehler '.$ex->getCode(),
+            'beschreibung' => $ex->getMessage());
+    }
+    finally {
+        return $data;
+    }
+}
+
+function idtodata($id){
+    $link = connectdb();
+    $sql = "select * from benutzer where id=?  ";
+    $bind_param='i';
+    $statement = mysqli_stmt_init($link);
+    mysqli_stmt_prepare($statement,$sql);
+
+    mysqli_stmt_bind_param($statement,$bind_param,$id);
+    mysqli_stmt_execute($statement);
+    $result=mysqli_stmt_get_result($statement);
+
+    $data=mysqli_fetch_array($result);
+    return $data;
+}
