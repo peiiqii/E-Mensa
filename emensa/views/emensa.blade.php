@@ -41,18 +41,26 @@
             <h1 id="Speisen">Köstlichkeiten, die Sie erwarten</h1>
             <table>
                 <tr>
+                    <th>Name</th>
                     <th></th>
-                    <th>Preis intern</th>
-                    <th>Preis extern</th>
+                    <th>Interner Preis</th>
+                    <th>Externer Preis</th>
                 </tr>
-            @foreach($gerichtlist as $gericht)
-                <tr>
-                    <td>{{$gericht['name']}}</td>
-                    <td>{{number_format($gericht['preis_intern'], 2,',')}}&euro;</td>
-                    <td>{{number_format($gericht['preis_extern'], 2,',')}}&euro;</td>
-                </tr>
-            @endforeach
-        </table><br>
+                @foreach($gerichtlist as $gericht)
+                    <tr>
+                        <td>{{$gericht['name']}}</td>
+                        <td>
+                            @if($gericht['bildname'] == NULL)
+                                <img src ="../img/gerichte/00_image_missing.jpg" width="100" height="100">
+                            @else
+                                <img src ="../img/gerichte/{{$gericht['bildname']}}" width="100" height="100">
+                            @endif
+                        </td>
+                        <td>{{number_format($gericht['preis_intern'], 2,',')}}&euro;</td>
+                        <td>{{number_format($gericht['preis_extern'], 2,',')}}&euro;</td>
+                    </tr>
+                @endforeach
+            </table><br>
         </div>
 
         <div class="grid-item">

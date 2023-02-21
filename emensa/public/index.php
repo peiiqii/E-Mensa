@@ -278,3 +278,20 @@ function view($viewname, $viewargs = array())
 
     return $blade->run($viewname, $viewargs);
 }
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+$logger = null;
+
+function logger()
+{
+    global  $logger;
+
+    if($logger == null)
+    {
+        $logger = new Logger('logger');
+        $logger->pushHandler(new StreamHandler('./emensa/storage/logs/info.log', Logger::INFO));
+        $logger->pushHandler(new StreamHandler('./emensa/storage/logs/warning.log', Logger::WARNING));
+    }
+    return $logger;
+}
