@@ -58,41 +58,84 @@ function checkeverything(){
     if (!empty($_POST)) {
         $allcheck = true;
         if (empty($_POST["Vorname"])) {
-            $allcheck=false;
-            echo  "vorname is required ".'<br>';
+            $allcheck = false;
+            echo "vorname is required " . '<br>';
 
         } else {
-            if(!checkname($_POST["Vorname"])){
-                $allcheck=false;
-                echo "vorname ist leer ".'<br>';
+            if (!checkname($_POST["Vorname"])) {
+                $allcheck = false;
+                echo "vorname ist leer " . '<br>';
             }
         }
         if (empty($_POST["Nachname"])) {
-            $allcheck=false;
-            echo  "Nachname is required ".'<br>';
+            $allcheck = false;
+            echo "Nachname is required " . '<br>';
 
         } else {
-            if(!checkname($_POST["Nachname"])){
-                $allcheck=false;
-                echo "Nachname ist leer ".'<br>';
+            if (!checkname($_POST["Nachname"])) {
+                $allcheck = false;
+                echo "Nachname ist leer " . '<br>';
             }
         }
         if (empty($_POST["Email"])) {
-            $allcheck=false;
-            echo  "Email is required".'<br>';
+            $allcheck = false;
+            echo "Email is required" . '<br>';
 
         } else {
-            if(!checkemail($_POST["Email"])){
-                $allcheck=false;
-                echo "E-Mail mit falschen Format".'<br>';
+            if (!checkemail($_POST["Email"])) {
+                $allcheck = false;
+                echo "E-Mail mit falschen Format" . '<br>';
             }
         }
         if (empty($_POST['Datenschutz'])) {
-            $allcheck=false;
+            $allcheck = false;
             echo 'Datenschutz nicht bestimmt';
         }
-    }
+        if ($allcheck) {
+            echo 'erfolgreich angemelden!';
+            $file = fopen('anmeldendata.txt', 'a');
+            if (!$file) {
+                die('Öffnen fehlgeschlagen');
+            }
+            foreach ($_POST as $txt) {
 
+                fwrite($file, $txt);
+                fwrite($file, ';');
+            }
+            fwrite($file, "\n");
+            fclose($file);
+            if (!empty($_POST)) {
+                $link = mysqli_connect("localhost",
+                    "root",
+                    "root",
+                    "emensawerbeseite",
+                    3306
+                );
+                if (!$link) {
+                    echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+                    exit();
+                }
+                $vorname = $_POST['Vorname'];
+                $nachname = $_POST['Nachname'];
+                $email = $_POST['Email'];
+
+                $geschlecht = $_POST['Anrede'];
+                $benachrichtungen = $_POST['Benachrichtungsinterval'];
+                $vorname = mysqli_real_escape_string($link, $vorname);
+                $nachname = mysqli_real_escape_string($link, $nachname);
+                $email = mysqli_real_escape_string($link, $email);
+                if (!in_array($geschlecht, AllOW_GESCHLECHT)) {
+                    $geschlecht = "Herr";
+                }
+                $benachrichtungen = mysqli_real_escape_string($link, $benachrichtungen);
+                $sql = "INSERT INTO kundeninfo(vorname,nachname,email,geschlecht,benachrichtungen) VALUES ('$vorname','$nachname','$email','$geschlecht','$benachrichtungen')";
+                writebesucher();
+
+                mysqli_query($link, $sql);
+                mysqli_close($link);
+            }
+        }
+    }
 }
 
 ?>

@@ -22,4 +22,19 @@ $Gerichte = [
         'price intern' => '2.00',
         'price extern' => '4.00']
 ];
+
+function sqlanfragen($sqlfragen,$link){
+    $result=mysqli_query($link,$sqlfragen);
+    if (!$result) {
+        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+        exit();
+    }
+    while ($row = mysqli_fetch_assoc($result)) {
+        foreach($row as $key=>$value){
+            echo $value.' ';
+        }
+        echo'<br>';
+    }
+    mysqli_free_result($result);
+}
 ?>

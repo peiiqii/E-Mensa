@@ -7,6 +7,9 @@
 include 'Gerichte.php';
 global $Gerichte;
 include "sqlanmelden.php";
+global $link;
+include "anzahl.php";
+$result = mysqli_query($link,"insert into besucher(date) values (now())");
 ?>
 
 <!DOCTYPE html>
@@ -152,13 +155,13 @@ include "sqlanmelden.php";
   <h1 id="Zahlen">E-Mensa in Zahlen</h1>
   <div class="Zahlrow">
     <div class="column">
-      <p> X Besuche</p>
+      <p> <?php sqlanfragen("SELECT count(*) FROM besucher",$link);?> Besuche</p>
     </div>
     <div class="column">
-      <p>Y Anmeldungen &nbsp;zum Newsletter</p>
+      <p><?php readanmeldungen();?> Anmeldungen zum Newsletter</p>
     </div>
     <div class="column">
-      <p>Z Speisen</p>
+      <p><?php sqlanfragen("SELECT count(*) FROM gericht",$link); ?> Speisen</p>
     </div>
   </div>
 
@@ -169,16 +172,14 @@ include "sqlanmelden.php";
   <ul>
     <li>Beste frishce Saisonale Zutaten</li>
     <li>Ausgewogene abwechslungsreiche Gerichte</li>
-    <li>SauberKeit</li>
+    <li>Sauberkeit</li>
   </ul>
 
   <h1 id="Text">Wir freuen uns auf Ihren Besuch!</h1>
 </div>
 <hr>
 <footer>
-  (c) E-Mensa GmbH |
-  Peiqi Lim, Shuyang Zhang |
-  <a href="">Impressum</a>
+  (c) E-Mensa GmbH | Peiqi Lim, Shuyang Zhang | <a href="">Impressum</a>
 </footer>
 </body>
 </html>
